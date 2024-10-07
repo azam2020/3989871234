@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Issue Report: Slow Network Throughput on VF</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding-top: 10px;
+            min-height: 50px;
+            border-bottom: #ddd 3px solid;
+        }
+        header h1 {
+            text-align: center;
+            margin: 0;
+        }
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #333;
+            padding-bottom: 5px;
+        }
+        section {
+            padding: 20px;
+            background: #fff;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            background: #f9f9f9;
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        code {
+            background: #eee;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Issue Report: Slow Network Throughput on VF</h1>
+        </div>
+    </header>
+
+    <div class="container">
+        <section>
+            <h2>Issue Summary</h2>
+            <p><strong>HSD No.:</strong> 3989871234</p>
+            <p><strong>Title:</strong> Slow Network Throughput Observed on Virtual Function</p>
+            <p><strong>Description:</strong> A noticeable slowdown in network throughput was observed on a Virtual Function (VF) assigned to a virtual machine. The Parent Function (PF) performance is unaffected, but traffic over the VF experiences significant latency and packet loss.</p>
+        </section>
+
+        <section>
+            <h2>Hardware Configuration</h2>
+            <ul>
+                <li><strong>Hardware Model:</strong> Lenovo ThinkSystem SR650</li>
+                <li><strong>Network Adapter:</strong> Mellanox ConnectX-4</li>
+                <li><strong>Number of Network Interfaces:</strong> 6 (SR-IOV enabled)</li>
+                <li><strong>Memory:</strong> 256 GB RAM</li>
+                <li><strong>CPU:</strong> AMD EPYC 7502P (2x)</li>
+                <li><strong>Firmware Version:</strong> 12.20.1000</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Software Configuration</h2>
+            <ul>
+                <li><strong>Operating System:</strong> RHEL 8.5</li>
+                <li><strong>Kernel Version:</strong> 4.18.0-305.12.1.el8.x86_64</li>
+                <li><strong>Network Driver Version:</strong> mlx5_core 5.1.0</li>
+                <li><strong>SR-IOV Configuration:</strong>
+                    <ul>
+                        <li>PFs: 2</li>
+                        <li>VFs per PF: 16</li>
+                    </ul>
+                </li>
+                <li><strong>Network Configuration Tool:</strong> <code>nmcli 1.28.0</code></li>
+                <li><strong>Virtualization Software:</strong> KVM 7.9.0</li>
+                <li><strong>Network Management:</strong> <code>systemd-networkd 247</code></li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Steps to Reproduce</h2>
+            <ol>
+                <li>Enable SR-IOV in BIOS/UEFI and configure 16 VFs on each PF.</li>
+                <li>Assign a VF to a virtual machine running on KVM.</li>
+                <li>Run a network performance benchmark (e.g., <code>iperf3</code>) between two VMs, one using the PF and the other using the VF.</li>
+                <li>Measure the throughput and observe the network latency.</li>
+                <li>Reboot both the VM and host system and repeat the performance test.</li>
+            </ol>
+        </section>
+
+        <section>
+            <h2>Expected Result</h2>
+            <p>The network throughput on the VF should be similar to that of the PF, with minimal latency and no packet loss.</p>
+        </section>
+
+        <section>
+            <h2>Actual Result</h2>
+            <p>Network throughput on the VF is significantly lower than the PF, with high latency and packet loss.</p>
+        </section>
+
+        <section>
+            <h2>Attached Files</h2>
+            <ul>
+                <li><a href="files/pf-performance.txt" download>PF Performance Log</a></li>
+                <li><a href="files/vf-performance.txt" download>VF Performance Log</a></li>
+                <li><a href="files/system-config-sr650.txt" download>System Configuration</a></li>
+                <li><a href="files/network-logs-sr650.txt" download>Network Logs</a></li>
+                <li><a href="files/benchmark-results.txt" download>Benchmark Results</a></li>
+            </ul>
+        </section>
+    </div>
+</body>
+</html>
